@@ -1,9 +1,8 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import numpy as np
 
 # Load data
@@ -14,7 +13,7 @@ except:
 
 st.title("📊 Regresi Linear Berganda (2 Variabel X)")
 
-  # --- Tampilkan Data Awal ---
+# --- Tampilkan Data Awal ---
 st.subheader("📋 Data Awal")
 st.dataframe(df)
 
@@ -29,7 +28,7 @@ if len(x_vars) != 2:
     st.warning("⚠️ Pilih tepat 2 variabel X untuk regresi linear berganda.")
 else:
     # --- Tampilkan Data Awal ---
-    st.subheader("📋 Data Awal")
+    st.subheader("📋 Data yang Digunakan untuk Regresi")
     selected_cols = x_vars + [y_var]
     preview_df = df[selected_cols].dropna()
     st.dataframe(preview_df)
@@ -42,14 +41,19 @@ else:
     model.fit(X, y)
     y_pred = model.predict(X)
 
+    mae = mean_absolute_error(y, y_pred)
+    mse = mean_squared_error(y, y_pred)
+    r_squared = r2_score(y, y_pred)
+
     st.markdown(f"""
     **Koefisien:**
     - {x_vars[0]} = {model.coef_[0]:.2f}
     - {x_vars[1]} = {model.coef_[1]:.2f}
 
     **Intercept:** {model.intercept_:.2f}  
-    **R² Score:** {r2_score(y, y_pred):.3f}  
-    **RMSE:** {np.sqrt(mean_squared_error(y, y_pred)):.2f}
+    **Mean Absolute Error (MAE):** {mae:.2f}  
+    **Mean Squared Error (MSE):** {mse:.2f}  
+    **R² Score:** {r_squared:.3f}
     """)
 
     # --- Visualisasi Prediksi vs Aktual ---
