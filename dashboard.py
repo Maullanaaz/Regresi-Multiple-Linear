@@ -101,12 +101,12 @@ top_10 = df_filtered.groupby(['Region', 'Fuel Type Name'], group_keys=False).app
 top_10_asia = top_10[top_10['Region'] == 'Asia']
 top_10_eropa = top_10[top_10['Region'] == 'Eropa']
 
-# Tampilkan Top 20 Mobil Asia dan Eropa
+# Tampilkan Top 10 Mobil Asia dan Eropa
 st.markdown("---")
-st.subheader("🚗 Top 20 Mobil Terhemat - Asia")
+st.subheader("🚗 Top 10 Mobil Terhemat - Asia")
 st.dataframe(top_10_asia[['Make', 'Model', 'Fuel Type Name', 'Comb (L/100 km)']].reset_index(drop=True))
 
-st.subheader("🚗 Top 20 Mobil Terhemat - Eropa")
+st.subheader("🚗 Top 10 Mobil Terhemat - Eropa")
 st.dataframe(top_10_eropa[['Make', 'Model', 'Fuel Type Name', 'Comb (L/100 km)']].reset_index(drop=True))
 
 # Mobil paling hemat
