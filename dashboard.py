@@ -20,51 +20,47 @@ st.dataframe(df)
 # --- Pilih Variabel X dan Y ---
 numeric_cols = df.select_dtypes(include=["float64", "int64"]).columns.tolist()
 
-x_vars = st.multiselect("Pilih 2 variabel X (independen):", numeric_cols, default=["Comb (mpg)", "CO2 Emissions (g/km)"])
+x_vars = ["Comb (mpg)", "CO2 Emissions (g/km)"] 
 y_var = st.selectbox("Pilih variabel Y (dependen):", numeric_cols)
 
-# --- Validasi Jumlah X ---
-if len(x_vars) != 2:
-    st.warning("⚠️ Pilih tepat 2 variabel X untuk regresi linear berganda.")
-else:
-    # --- Tampilkan Data yang Digunakan untuk Regresi ---
-    st.subheader("📋 Data yang Digunakan untuk Regresi")
-    selected_cols = x_vars + [y_var]
-    preview_df = df[selected_cols].dropna()
-    st.dataframe(preview_df)
+# --- Tampilkan Data yang Digunakan untuk Regresi ---
+st.subheader("📋 Data yang Digunakan untuk Regresi")
+selected_cols =x_vars + [y_var]
+preview_df = df[selected_cols].dropna()
+st.dataframe(preview_df)
 
-    # --- Model Regresi ---
-    st.subheader("🔍 Hasil Regresi Linear")
-    X = preview_df[x_vars]
-    y = preview_df[y_var]
-    model = LinearRegression()
-    model.fit(X, y)
-    y_pred = model.predict(X)
+# --- Model Regresi ---
+st.subheader("🔍 Hasil Regresi Linear")
+X = preview_df[x_vars]
+y = preview_df[y_var]
+model = LinearRegression()
+model.fit(X, y)
+y_pred = model.predict(X)
 
-    mae = mean_absolute_error(y, y_pred)
-    mse = mean_squared_error(y, y_pred)
-    r_squared = r2_score(y, y_pred)
+mae = mean_absolute_error(y, y_pred)
+mse = mean_squared_error(y, y_pred)
+r_squared = r2_score(y, y_pred)
 
-    st.markdown(f"""
-    **Koefisien:**
-    - {x_vars[0]} = {model.coef_[0]:.2f}
-    - {x_vars[1]} = {model.coef_[1]:.2f}
+st.markdown(f"""
+**Koefisien:**
+- {x_vars[0]} = {model.coef_[0]:.2f}
+- {x_vars[1]} = {model.coef_[1]:.2f}
 
-     
-    **Mean Absolute Error (MAE):** {mae:.2f}  
-    **Mean Squared Error (MSE):** {mse:.2f}  
-    **R² Score:** {r_squared:.3f}
-    """)
+ 
+**Mean Absolute Error (MAE):** {mae:.2f}  
+**Mean Squared Error (MSE):** {mse:.2f}  
+**R² Score:** {r_squared:.3f}
+""")
 
-    # --- Visualisasi Prediksi vs Aktual ---
-    st.subheader("📈 Grafik Prediksi vs Aktual")
-    fig, ax = plt.subplots()
-    ax.scatter(y, y_pred, color='green', alpha=0.6)
-    ax.plot([y.min(), y.max()], [y.min(), y.max()], 'r--', lw=2)
-    ax.set_xlabel("Aktual")
-    ax.set_ylabel("Prediksi")
-    ax.set_title(f"Prediksi vs Aktual untuk {y_var}")
-    st.pyplot(fig)
+# --- Visualisasi Prediksi vs Aktual ---
+st.subheader("📈 Grafik Prediksi vs Aktual")
+fig, ax = plt.subplots()
+ax.scatter(y, y_pred, color='green', alpha=0.6)
+ax.plot([y.min(), y.max()], [y.min(), y.max()], 'r--', lw=2)
+ax.set_xlabel("Aktual")
+ax.set_ylabel("Prediksi")
+ax.set_title(f"Prediksi vs Aktual untuk {y_var}")
+st.pyplot(fig)
 
 # === Insight Tambahan: Mobil Paling Hemat Asia vs Eropa ===
 st.markdown("---")
