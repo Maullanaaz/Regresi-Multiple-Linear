@@ -20,8 +20,8 @@ st.dataframe(df)
 # --- Pilih Variabel X dan Y ---
 numeric_cols = df.select_dtypes(include=["float64", "int64"]).columns.tolist()
 
-x_vars = st.multiselect("Pilih 2 variabel X (independen):", numeric_cols, default=["Comb (mpg)", "CO2 Emissions (g/km)"])
-y_var = st.selectbox("Pilih variabel Y (dependen):", numeric_cols)
+x_vars = st.multiselect("Pilih 2 variabel X (independen):", default=["Comb (mpg)", "CO2 Emissions (g/km)"])
+y_var = st.selectbox("Pilih variabel Y (dependen):",default=["Fuel Consumption (L/100Km)"])
 
 # --- Validasi Jumlah X ---
 if len(x_vars) != 2:
