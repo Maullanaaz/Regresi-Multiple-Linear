@@ -23,6 +23,8 @@ numeric_cols = df.select_dtypes(include=["float64", "int64"]).columns.tolist()
 x_vars = ["Comb (mpg)", "CO2 Emissions (g/km)"] 
 y_var = st.selectbox("Pilih variabel Y (dependen):", numeric_cols)
 
+st.write (x_vars)
+
 # --- Tampilkan Data yang Digunakan untuk Regresi ---
 st.subheader("📋 Data yang Digunakan untuk Regresi")
 selected_cols =x_vars + [y_var]
