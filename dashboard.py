@@ -31,7 +31,7 @@ st.dataframe(preview_df)
 # --- Model Regresi ---
 st.subheader("🔍 Hasil Regresi Linear")
 X = preview_df[x_vars]
-y = preview_df[y_var]
+y = preview_df[y_var[0]] 
 model = LinearRegression()
 model.fit(X, y)
 y_pred = model.predict(X)
