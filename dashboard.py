@@ -11,7 +11,7 @@ try:
 except:
     df = pd.read_csv("BAHAN BAKAR MOBIL 2023.csv", encoding="ISO-8859-1")
 
-st.title("📊 Perbandingan Konsumsi Bahan Bakar Kendaraan Mobil Menggunakan Regresi Linear Berganda")
+st.title("📊 Regresi Linear Berganda (2 Variabel X)")
 
 # --- Tampilkan Data Awal ---
 st.subheader("📋 Data Awal")
