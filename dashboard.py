@@ -10,15 +10,15 @@ try:
 except:
     df = pd.read_csv("BAHAN BAKAR MOBIL 2023.csv", encoding="ISO-8859-1")
 
-st.title("📊 Regresi Linear Berganda (Comb (mpg) & CO2 Emissions (g/km) terhadap Fuel Consumption (L/100 km))")
+st.title("📊 Regresi Linear Berganda (Comb (mpg) & CO2 Emissions (g/km) terhadap Fuel Consumption (L/100Km))")
 
 # --- Tampilkan Data Awal ---
 st.subheader("📋 Data Awal")
 st.dataframe(df)
 
-# --- Variabel X dan Y ---
+# --- Variabel X dan Y (Fix sesuai nama kolom) ---
 x_vars = ["Comb (mpg)", "CO2 Emissions (g/km)"]
-y_var = "Fuel Consumption (L/100 km)"
+y_var = "Fuel Consumption (L/100Km)"
 
 # --- Tampilkan Data yang Digunakan untuk Regresi ---
 st.subheader("📋 Data yang Digunakan untuk Regresi")
