@@ -90,8 +90,8 @@ preview_df["warna"] = preview_df["index"].apply(get_color)
 # Buat scatter plot dengan warna sesuai kelompok dan label ID
 fig, ax = plt.subplots()
 for i, row in preview_df.iterrows():
-    ax.scatter(row[y_var[0]], row["y_pred"], color=row["warna"], alpha=0.6, s=20)
-    ax.text(row[y_var[0]], row["y_pred"], str(row["index"]), fontsize=4, alpha=0.5)
+    ax.scatter(row[y_var[0]], row["y_pred"], color=row["warna"], alpha=0.6, s=80)
+    ax.text(row[y_var[0]], row["y_pred"], str(row["index"]), fontsize=6, alpha=0.5)
 
 # Garis referensi
 ax.plot([y.min(), y.max()], [y.min(), y.max()], 'r--', lw=2)
