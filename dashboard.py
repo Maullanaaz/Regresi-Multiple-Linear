@@ -71,9 +71,9 @@ def get_color(idx):
     elif idx <= 300:
         return "green"
     elif idx <= 375:
-        return "pink"
+        return "cyan"
     elif idx <= 450:
-        return "lightcoral"
+        return "tomato"
     elif idx <= 525:
         return "gold"
     elif idx <= 600:
@@ -107,8 +107,8 @@ st.markdown("""
 - 🟠 **Oranye**: ID 76–150  
 - 🔵 **Biru**: ID 151–225  
 - 🟢 **Hijau**: ID 226–300  
-- 🌸 **Pink**: ID 301–375  
-- 🌺 **Light Coral**: ID 376–450  
+- 🟦 **Cyan**: ID 301–375  
+- 🍅 **Tomato**: ID 376–450  
 - 🟡 **Kuning (Gold)**: ID 451–525  
 - 🟤 **Cokelat (Chocolate)**: ID 526–600  
 - 🔷 **Toska (Deep Sky Blue)**: ID 601–675  
