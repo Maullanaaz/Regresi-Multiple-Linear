@@ -1,21 +1,4 @@
-import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-import numpy as np
 
-# Load data
-try:
-    df = pd.read_csv("BAHAN BAKAR MOBIL 2023.csv", encoding="latin1")
-except:
-    df = pd.read_csv("BAHAN BAKAR MOBIL 2023.csv", encoding="ISO-8859-1")
-
-st.title("\U0001F4CA Regresi Linear Berganda (2 Variabel X)")
-
-# --- Tampilkan Data Awal ---
-st.subheader("\U0001F4CB Data Awal")
-st.dataframe(df)
 
 # --- Pilih Variabel X dan Y ---
 numeric_cols = df.select_dtypes(include=["float64", "int64"]).columns.tolist()
@@ -87,11 +70,10 @@ def get_color(idx):
 # Tambahkan kolom warna
 preview_df["warna"] = preview_df["index"].apply(get_color)
 
-# Buat scatter plot dengan warna sesuai kelompok dan label ID
+# Buat scatter plot dengan warna sesuai kelompok (tanpa label angka)
 fig, ax = plt.subplots()
 for i, row in preview_df.iterrows():
     ax.scatter(row[y_var[0]], row["y_pred"], color=row["warna"], alpha=0.6, s=80)
-    ax.text(row[y_var[0]], row["y_pred"], str(row["index"]), fontsize=6, alpha=0.5)
 
 # Garis referensi
 ax.plot([y.min(), y.max()], [y.min(), y.max()], 'r--', lw=2)
