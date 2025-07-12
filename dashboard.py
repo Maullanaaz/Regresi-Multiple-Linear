@@ -1,26 +1,15 @@
-
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import numpy as np
+
 # Gaya font global
 st.markdown("""
     <style>
     html, body, [class*='css']  {
         font-family: 'Poppins', sans-serif;
-        font-size: 16px;
-    }
-    </style>
-""", unsafe_allow_html=True)
-
-
-# Styling global
-st.markdown("""
-    <style>
-    html, body, [class*="css"]  {
-        font-family: 'Segoe UI', sans-serif;
         font-size: 16px;
     }
     </style>
@@ -46,6 +35,8 @@ y_var = ["Fuel Consumption (L/100Km)"]
 
 # --- Tampilkan Data yang Digunakan untuk Regresi ---
 st.markdown("### 📊 Data yang Digunakan untuk Model Regresi")
+st.markdown("📌 Variabel **independen (X)**: `Comb (mpg)`, `CO2 Emissions (g/km)`  
+📌 Variabel **dependen (Y)**: `Fuel Consumption (L/100Km)`")
 selected_cols = x_vars + y_var
 preview_df = df[selected_cols].dropna()
 st.dataframe(preview_df)
