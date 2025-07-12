@@ -35,13 +35,16 @@ y_var = ["Fuel Consumption (L/100Km)"]
 
 # --- Tampilkan Data yang Digunakan untuk Regresi ---
 st.markdown("### 📊 Data yang Digunakan untuk Model Regresi")
-st.success("""📌 **Variabel**
 
-**Independen (X):**  
+# Penjelasan variabel X dan Y dalam kotak terpisah
+st.markdown("**📌 Variabel Independen (X):**")
+st.success("""
 - Comb (mpg)  
 - CO2 Emissions (g/km)
+""")
 
-**Dependen (Y):**  
+st.markdown("**📌 Variabel Dependen (Y):**")
+st.success("""
 - Fuel Consumption (L/100Km)
 """)
 
