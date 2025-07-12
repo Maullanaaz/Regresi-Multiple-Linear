@@ -14,10 +14,10 @@ except:
 # Ambil kolom numerik
 numeric_cols = df.select_dtypes(include=["float64", "int64"]).columns.tolist()
 
-st.title("\U0001F4CA Regresi Linear Berganda (2 Variabel X)")
+st.title("📊 Regresi Linear Berganda (2 Variabel X)")
 
 # --- Tampilkan Data Awal ---
-st.subheader("\U0001F4CB Data Awal")
+st.subheader("📋 Data Awal")
 st.dataframe(df)
 
 # --- Pilih Variabel X dan Y ---
@@ -25,13 +25,13 @@ x_vars = ["Comb (mpg)", "CO2 Emissions (g/km)"]
 y_var = ["Fuel Consumption (L/100Km)"]
 
 # --- Tampilkan Data yang Digunakan untuk Regresi ---
-st.subheader("\U0001F4CB Data yang Digunakan untuk Regresi")
+st.subheader("📋 Data yang Digunakan untuk Regresi")
 selected_cols = x_vars + y_var
 preview_df = df[selected_cols].dropna()
 st.dataframe(preview_df)
 
 # --- Model Regresi ---
-st.subheader("\U0001F50D Hasil Regresi Linear")
+st.subheader("🔍 Hasil Regresi Linear")
 X = preview_df[x_vars]
 y = preview_df[y_var[0]]
 model = LinearRegression()
@@ -53,42 +53,36 @@ st.markdown(f"""
 """)
 
 # --- Visualisasi Prediksi vs Aktual dengan Warna Berdasarkan Index ---
-st.subheader("\U0001F4C8 Grafik Prediksi vs Aktual (Berwarna berdasarkan range ID)")
+st.subheader("📈 Grafik Prediksi vs Aktual (Berwarna berdasarkan range ID)")
 
 # Tambahkan kolom prediksi dan index ke dataframe
 preview_df = preview_df.copy()
 preview_df["y_pred"] = y_pred
-preview_df["index"] = range(1, len(preview_df) + 1)
+preview_df["index"] = range(len(preview_df))  # Mulai dari 0
 
-# Fungsi pewarnaan berdasarkan index (warna gelap diganti lebih terang)
+# Fungsi pewarnaan berdasarkan index (0-based)
 def get_color(idx):
-    if idx <= 75:
+    if idx <= 92:
         return "purple"
-    elif idx <= 150:
+    elif idx <= 184:
         return "orange"
-    elif idx <= 225:
+    elif idx <= 276:
         return "blue"
-    elif idx <= 300:
+    elif idx <= 368:
         return "green"
-    elif idx <= 375:
-        return "cyan"
-    elif idx <= 450:
-        return "tomato"
-    elif idx <= 525:
-        return "gold"
-    elif idx <= 600:
-        return "chocolate"
-    elif idx <= 675:
-        return "deepskyblue"
-    elif idx <= 750:
+    elif idx <= 460:
+        return "gray"
+    elif idx <= 552:
         return "red"
+    elif idx <= 644:
+        return "gold"
     else:
-        return "violet"
+        return "saddlebrown"
 
 # Tambahkan kolom warna
 preview_df["warna"] = preview_df["index"].apply(get_color)
 
-# Buat scatter plot dengan warna sesuai kelompok (tanpa label angka)
+# Buat scatter plot dengan warna sesuai kelompok
 fig, ax = plt.subplots()
 for i, row in preview_df.iterrows():
     ax.scatter(row[y_var[0]], row["y_pred"], color=row["warna"], alpha=0.6, s=80)
@@ -101,24 +95,21 @@ ax.set_title(f"Prediksi vs Aktual untuk {y_var[0]}")
 st.pyplot(fig)
 
 # Legend warna manual
-st.markdown("#### \U0001F4C1 Keterangan Warna Berdasarkan ID")
+st.markdown("#### 📁 Keterangan Warna Berdasarkan ID")
 st.markdown("""
-- 🔸 Ungu: ID 1–75  
-- 🔸 Oranye: ID 76–150  
-- 🔸 Biru: ID 151–225  
-- 🔸 Hijau: ID 226–300  
-- 🔸 Cyan: ID 301–375  
-- 🔸 Tomato: ID 376–450  
-- 🔸 Kuning: ID 451–525  
-- 🔸 Cokelat: ID 526–600  
-- 🔸 Toska: ID 601–675  
-- 🔸 Merah: ID 676–750  
-- 🔸 Violet: ID 751–832
+- 🟣 Ungu: ID 0–92  
+- 🟠 Oranye: ID 93–184  
+- 🔵 Biru: ID 185–276  
+- 🟢 Hijau: ID 277–368  
+- ⚫ Abu-Abu: ID 369–460  
+- 🔴 Merah: ID 461–552  
+- 🟡 Kuning: ID 553–644  
+- 🟤 Cokelat: ID 645–832
 """)
 
 # === Insight Tambahan: Mobil Paling Hemat Asia vs Eropa ===
 st.markdown("---")
-st.subheader("\U0001F50D Insight Tambahan: Perbandingan Mobil Terhemat Asia vs Eropa")
+st.subheader("🔍 Insight Tambahan: Perbandingan Mobil Terhemat Asia vs Eropa")
 
 # Mapping jenis bahan bakar
 fuel_mapping = {
