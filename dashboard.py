@@ -103,17 +103,17 @@ st.pyplot(fig)
 # Legend warna manual
 st.markdown("#### \U0001F4C1 Keterangan Warna Berdasarkan ID")
 st.markdown("""
-- 🔮 **Ungu**: ID 1–75  
-- 🟠 **Oranye**: ID 76–150  
-- 🔵 **Biru**: ID 151–225  
-- 🟢 **Hijau**: ID 226–300  
-- 🟦 **Cyan**: ID 301–375  
-- 🍅 **Tomato**: ID 376–450  
-- 🟡 **Kuning (Gold)**: ID 451–525  
-- 🟤 **Cokelat (Chocolate)**: ID 526–600  
-- 🔷 **Toska (Deep Sky Blue)**: ID 601–675  
-- 🔴 **Merah**: ID 676–750  
-- 💜 **Violet**: ID 751–832
+- 🔸 Ungu: ID 1–75  
+- 🔸 Oranye: ID 76–150  
+- 🔸 Biru: ID 151–225  
+- 🔸 Hijau: ID 226–300  
+- 🔸 Cyan: ID 301–375  
+- 🔸 Tomato: ID 376–450  
+- 🔸 Kuning: ID 451–525  
+- 🔸 Cokelat: ID 526–600  
+- 🔸 Toska: ID 601–675  
+- 🔸 Merah: ID 676–750  
+- 🔸 Violet: ID 751–832
 """)
 
 # === Insight Tambahan: Mobil Paling Hemat Asia vs Eropa ===
