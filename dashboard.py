@@ -5,6 +5,16 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import numpy as np
+# Gaya font global
+st.markdown("""
+    <style>
+    html, body, [class*='css']  {
+        font-family: 'Poppins', sans-serif;
+        font-size: 16px;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 
 # Styling global
 st.markdown("""
