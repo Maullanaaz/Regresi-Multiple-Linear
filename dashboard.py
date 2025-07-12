@@ -64,7 +64,7 @@ preview_df["index"] = range(len(preview_df))  # Mulai dari 0
 # Fungsi pewarnaan berdasarkan index (0-based)
 def get_color(idx):
     if idx <= 92:
-        return "purple"
+        return "brown"
     elif idx <= 184:
         return "orange"
     elif idx <= 276:
@@ -78,7 +78,7 @@ def get_color(idx):
     elif idx <= 644:
         return "gold"
     else:
-        return "saddlebrown"
+        return "saddlepurple"
 
 # Tambahkan kolom warna
 preview_df["warna"] = preview_df["index"].apply(get_color)
@@ -98,14 +98,14 @@ st.pyplot(fig)
 # Legend warna manual
 st.markdown("#### 📁 Keterangan Warna Berdasarkan ID")
 st.markdown("""
-- 🟣 Ungu: ID 0–92  
+- 🟤 Cokelat: ID 0–92  
 - 🟠 Oranye: ID 93–184  
 - 🔵 Biru: ID 185–276  
 - 🟢 Hijau: ID 277–368  
 - ⚫ Abu-Abu: ID 369–460  
 - 🔴 Merah: ID 461–552  
 - 🟡 Kuning: ID 553–644  
-- 🟤 Cokelat: ID 645–832
+- 🟣 Ungu: ID 645–832
 """)
 
 # === Insight Tambahan: Mobil Paling Hemat Asia vs Eropa ===
