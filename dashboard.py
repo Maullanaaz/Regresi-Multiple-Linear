@@ -35,8 +35,16 @@ y_var = ["Fuel Consumption (L/100Km)"]
 
 # --- Tampilkan Data yang Digunakan untuk Regresi ---
 st.markdown("### 📊 Data yang Digunakan untuk Model Regresi")
-st.success("📌 Variabel **independen (X)**: Comb (mpg), CO2 Emissions (g/km)")
-st.success("📌 Variabel **dependen (Y)**: Fuel Consumption (L/100Km)")
+st.success("""📌 **Variabel**
+
+**Independen (X):**  
+- Comb (mpg)  
+- CO2 Emissions (g/km)
+
+**Dependen (Y):**  
+- Fuel Consumption (L/100Km)
+""")
+
 selected_cols = x_vars + y_var
 preview_df = df[selected_cols].dropna()
 st.dataframe(preview_df)
@@ -159,3 +167,4 @@ elif most_asia['Comb (L/100 km)'] > most_eropa['Comb (L/100 km)']:
     st.info(f"🏆 {most_eropa['Make']} {most_eropa['Model']} dari Eropa lebih hemat.")
 else:
     st.info("Keduanya memiliki efisiensi bahan bakar yang sama.")
+
