@@ -64,7 +64,7 @@ preview_df["index"] = range(len(preview_df))  # Mulai dari 0
 # Fungsi pewarnaan berdasarkan index (0-based)
 def get_color(idx):
     if idx <= 92:
-        return "brown"
+        return "saddlebrown"
     elif idx <= 184:
         return "orange"
     elif idx <= 276:
@@ -78,7 +78,7 @@ def get_color(idx):
     elif idx <= 644:
         return "gold"
     else:
-        return "saddlepurple"
+        return "purple"
 
 # Tambahkan kolom warna
 preview_df["warna"] = preview_df["index"].apply(get_color)
