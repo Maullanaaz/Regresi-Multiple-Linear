@@ -11,10 +11,10 @@ try:
 except:
     df = pd.read_csv("BAHAN BAKAR MOBIL 2023.csv", encoding="ISO-8859-1")
 
-st.title("📊 Regresi Linear Berganda (2 Variabel X)")
+st.title("\U0001F4CA Regresi Linear Berganda (2 Variabel X)")
 
 # --- Tampilkan Data Awal ---
-st.subheader("📋 Data Awal")
+st.subheader("\U0001F4CB Data Awal")
 st.dataframe(df)
 
 # --- Pilih Variabel X dan Y ---
@@ -24,15 +24,15 @@ x_vars = ["Comb (mpg)", "CO2 Emissions (g/km)"]
 y_var = ["Fuel Consumption (L/100Km)"]
 
 # --- Tampilkan Data yang Digunakan untuk Regresi ---
-st.subheader("📋 Data yang Digunakan untuk Regresi")
+st.subheader("\U0001F4CB Data yang Digunakan untuk Regresi")
 selected_cols = x_vars + y_var
 preview_df = df[selected_cols].dropna()
 st.dataframe(preview_df)
 
 # --- Model Regresi ---
-st.subheader("🔍 Hasil Regresi Linear")
+st.subheader("\U0001F50D Hasil Regresi Linear")
 X = preview_df[x_vars]
-y = preview_df[y_var[0]] 
+y = preview_df[y_var[0]]
 model = LinearRegression()
 model.fit(X, y)
 y_pred = model.predict(X)
@@ -52,7 +52,7 @@ st.markdown(f"""
 """)
 
 # --- Visualisasi Prediksi vs Aktual dengan Warna Berdasarkan Index ---
-st.subheader("📈 Grafik Prediksi vs Aktual (Berwarna berdasarkan range ID)")
+st.subheader("\U0001F4C8 Grafik Prediksi vs Aktual (Berwarna berdasarkan range ID)")
 
 # Tambahkan kolom prediksi dan index ke dataframe
 preview_df = preview_df.copy()
@@ -87,10 +87,11 @@ def get_color(idx):
 # Tambahkan kolom warna
 preview_df["warna"] = preview_df["index"].apply(get_color)
 
-# Buat scatter plot dengan warna sesuai kelompok
+# Buat scatter plot dengan warna sesuai kelompok dan label ID
 fig, ax = plt.subplots()
 for i, row in preview_df.iterrows():
     ax.scatter(row[y_var[0]], row["y_pred"], color=row["warna"], alpha=0.6, s=20)
+    ax.text(row[y_var[0]], row["y_pred"], str(row["index"]), fontsize=4, alpha=0.5)
 
 # Garis referensi
 ax.plot([y.min(), y.max()], [y.min(), y.max()], 'r--', lw=2)
@@ -99,9 +100,25 @@ ax.set_ylabel("Prediksi")
 ax.set_title(f"Prediksi vs Aktual untuk {y_var[0]}")
 st.pyplot(fig)
 
+# Legend warna manual
+st.markdown("#### \U0001F5C2️ Keterangan Warna Berdasarkan ID")
+st.markdown("""
+- 🔸 **Ungu**: ID 1–75  
+- 🔶 **Oranye**: ID 76–150  
+- 🔹 **Biru**: ID 151–225  
+- 🔵 **Hijau**: ID 226–300  
+- 🌸 **Pink**: ID 301–375  
+- ⚫ **Abu-abu**: ID 376–450  
+- 🟡 **Kuning**: ID 451–525  
+- 🟣 **Cokelat**: ID 526–600  
+- 🟦 **Toska**: ID 601–675  
+- 🔴 **Merah**: ID 676–750  
+- ⚫ **Hitam**: ID 751–832
+""")
+
 # === Insight Tambahan: Mobil Paling Hemat Asia vs Eropa ===
 st.markdown("---")
-st.subheader("🔍 Insight Tambahan: Perbandingan Mobil Terhemat Asia vs Eropa")
+st.subheader("\U0001F50D Insight Tambahan: Perbandingan Mobil Terhemat Asia vs Eropa")
 
 # Mapping jenis bahan bakar
 fuel_mapping = {
