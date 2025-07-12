@@ -35,8 +35,10 @@ y_var = ["Fuel Consumption (L/100Km)"]
 
 # --- Tampilkan Data yang Digunakan untuk Regresi ---
 st.markdown("### 📊 Data yang Digunakan untuk Model Regresi")
-st.markdown("📌 Variabel **independen (X)**: `Comb (mpg)`, `CO2 Emissions (g/km)`  
-📌 Variabel **dependen (Y)**: `Fuel Consumption (L/100Km)`")
+st.markdown("""
+📌 Variabel **independen (X)**: `Comb (mpg)`, `CO2 Emissions (g/km)`  
+📌 Variabel **dependen (Y)**: `Fuel Consumption (L/100Km)`
+""")
 selected_cols = x_vars + y_var
 preview_df = df[selected_cols].dropna()
 st.dataframe(preview_df)
