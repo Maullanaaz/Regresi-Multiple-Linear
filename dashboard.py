@@ -1,8 +1,26 @@
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+import numpy as np
 
+# Load data
+try:
+    df = pd.read_csv("BAHAN BAKAR MOBIL 2023.csv", encoding="latin1")
+except:
+    df = pd.read_csv("BAHAN BAKAR MOBIL 2023.csv", encoding="ISO-8859-1")
 
-# --- Pilih Variabel X dan Y ---
+# Ambil kolom numerik
 numeric_cols = df.select_dtypes(include=["float64", "int64"]).columns.tolist()
 
+st.title("\U0001F4CA Regresi Linear Berganda (2 Variabel X)")
+
+# --- Tampilkan Data Awal ---
+st.subheader("\U0001F4CB Data Awal")
+st.dataframe(df)
+
+# --- Pilih Variabel X dan Y ---
 x_vars = ["Comb (mpg)", "CO2 Emissions (g/km)"]
 y_var = ["Fuel Consumption (L/100Km)"]
 
