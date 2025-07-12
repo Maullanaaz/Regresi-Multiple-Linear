@@ -11,10 +11,10 @@ try:
 except:
     df = pd.read_csv("BAHAN BAKAR MOBIL 2023.csv", encoding="ISO-8859-1")
 
-st.title("\U0001F4CA Regresi Linear Berganda (2 Variabel X)")
+st.title("📊 Regresi Linear Berganda (2 Variabel X)")
 
 # --- Tampilkan Data Awal ---
-st.subheader("\U0001F4CB Data Awal")
+st.subheader("📋 Data Awal")
 st.dataframe(df)
 
 # --- Pilih Variabel X dan Y ---
@@ -24,15 +24,15 @@ x_vars = ["Comb (mpg)", "CO2 Emissions (g/km)"]
 y_var = ["Fuel Consumption (L/100Km)"]
 
 # --- Tampilkan Data yang Digunakan untuk Regresi ---
-st.subheader("\U0001F4CB Data yang Digunakan untuk Regresi")
+st.subheader("📋 Data yang Digunakan untuk Regresi")
 selected_cols = x_vars + y_var
 preview_df = df[selected_cols].dropna()
 st.dataframe(preview_df)
 
 # --- Model Regresi ---
-st.subheader("\U0001F50D Hasil Regresi Linear")
+st.subheader("🔍 Hasil Regresi Linear")
 X = preview_df[x_vars]
-y = preview_df[y_var[0]]
+y = preview_df[y_var[0]] 
 model = LinearRegression()
 model.fit(X, y)
 y_pred = model.predict(X)
@@ -52,7 +52,7 @@ st.markdown(f"""
 """)
 
 # --- Visualisasi Prediksi vs Aktual dengan Warna Berdasarkan Index ---
-st.subheader("\U0001F4C8 Grafik Prediksi vs Aktual (Berwarna berdasarkan range ID)")
+st.subheader("📈 Grafik Prediksi vs Aktual (Berwarna berdasarkan range ID)")
 
 # Tambahkan kolom prediksi dan index ke dataframe
 preview_df = preview_df.copy()
@@ -101,7 +101,7 @@ st.pyplot(fig)
 
 # === Insight Tambahan: Mobil Paling Hemat Asia vs Eropa ===
 st.markdown("---")
-st.subheader("\U0001F50D Insight Tambahan: Perbandingan Mobil Terhemat Asia vs Eropa")
+st.subheader("🔍 Insight Tambahan: Perbandingan Mobil Terhemat Asia vs Eropa")
 
 # Mapping jenis bahan bakar
 fuel_mapping = {
@@ -160,4 +160,4 @@ if most_asia['Comb (L/100 km)'] < most_eropa['Comb (L/100 km)']:
 elif most_asia['Comb (L/100 km)'] > most_eropa['Comb (L/100 km)']:
     st.info(f"🏆 **{most_eropa['Make']} {most_eropa['Model']}** dari Eropa lebih hemat.")
 else:
-    st.info("Keduanya memiliki efisiensi bahan bakar yang sa
+    st.info("Keduanya memiliki efisiensi bahan bakar yang sama.")
