@@ -11,10 +11,10 @@ try:
 except:
     df = pd.read_csv("BAHAN BAKAR MOBIL 2023.csv", encoding="ISO-8859-1")
 
-st.title("📊 Regresi Linear Berganda (2 Variabel X)")
+st.title("\U0001F4CA Regresi Linear Berganda (2 Variabel X)")
 
 # --- Tampilkan Data Awal ---
-st.subheader("📋 Data Awal")
+st.subheader("\U0001F4CB Data Awal")
 st.dataframe(df)
 
 # --- Pilih Variabel X dan Y ---
@@ -22,16 +22,17 @@ numeric_cols = df.select_dtypes(include=["float64", "int64"]).columns.tolist()
 
 x_vars = ["Comb (mpg)", "CO2 Emissions (g/km)"]
 y_var = ["Fuel Consumption (L/100Km)"]
+
 # --- Tampilkan Data yang Digunakan untuk Regresi ---
-st.subheader("📋 Data yang Digunakan untuk Regresi")
-selected_cols =x_vars + y_var
+st.subheader("\U0001F4CB Data yang Digunakan untuk Regresi")
+selected_cols = x_vars + y_var
 preview_df = df[selected_cols].dropna()
 st.dataframe(preview_df)
 
 # --- Model Regresi ---
-st.subheader("🔍 Hasil Regresi Linear")
+st.subheader("\U0001F50D Hasil Regresi Linear")
 X = preview_df[x_vars]
-y = preview_df[y_var[0]] 
+y = preview_df[y_var[0]]
 model = LinearRegression()
 model.fit(X, y)
 y_pred = model.predict(X)
@@ -45,25 +46,62 @@ st.markdown(f"""
 - {x_vars[0]} = {model.coef_[0]:.2f}
 - {x_vars[1]} = {model.coef_[1]:.2f}
 
- 
 **Mean Absolute Error (MAE):** {mae:.2f}  
 **Mean Squared Error (MSE):** {mse:.2f}  
 **R² Score:** {r_squared:.3f}
 """)
 
-# --- Visualisasi Prediksi vs Aktual ---
-st.subheader("📈 Grafik Prediksi vs Aktual")
+# --- Visualisasi Prediksi vs Aktual dengan Warna Berdasarkan Index ---
+st.subheader("\U0001F4C8 Grafik Prediksi vs Aktual (Berwarna berdasarkan range ID)")
+
+# Tambahkan kolom prediksi dan index ke dataframe
+preview_df = preview_df.copy()
+preview_df["y_pred"] = y_pred
+preview_df["index"] = range(1, len(preview_df) + 1)
+
+# Fungsi pewarnaan berdasarkan index
+def get_color(idx):
+    if idx <= 75:
+        return "purple"
+    elif idx <= 150:
+        return "orange"
+    elif idx <= 225:
+        return "blue"
+    elif idx <= 300:
+        return "green"
+    elif idx <= 375:
+        return "pink"
+    elif idx <= 450:
+        return "gray"
+    elif idx <= 525:
+        return "yellow"
+    elif idx <= 600:
+        return "brown"
+    elif idx <= 675:
+        return "teal"
+    elif idx <= 750:
+        return "red"
+    else:
+        return "black"
+
+# Tambahkan kolom warna
+preview_df["warna"] = preview_df["index"].apply(get_color)
+
+# Buat scatter plot dengan warna sesuai kelompok
 fig, ax = plt.subplots()
-ax.scatter(y, y_pred, color='green', alpha=0.6)
+for i, row in preview_df.iterrows():
+    ax.scatter(row[y_var[0]], row["y_pred"], color=row["warna"], alpha=0.6, s=20)
+
+# Garis referensi
 ax.plot([y.min(), y.max()], [y.min(), y.max()], 'r--', lw=2)
 ax.set_xlabel("Aktual")
 ax.set_ylabel("Prediksi")
-ax.set_title(f"Prediksi vs Aktual untuk {y_var}")
+ax.set_title(f"Prediksi vs Aktual untuk {y_var[0]}")
 st.pyplot(fig)
 
 # === Insight Tambahan: Mobil Paling Hemat Asia vs Eropa ===
 st.markdown("---")
-st.subheader("🔍 Insight Tambahan: Perbandingan Mobil Terhemat Asia vs Eropa")
+st.subheader("\U0001F50D Insight Tambahan: Perbandingan Mobil Terhemat Asia vs Eropa")
 
 # Mapping jenis bahan bakar
 fuel_mapping = {
@@ -122,5 +160,4 @@ if most_asia['Comb (L/100 km)'] < most_eropa['Comb (L/100 km)']:
 elif most_asia['Comb (L/100 km)'] > most_eropa['Comb (L/100 km)']:
     st.info(f"🏆 **{most_eropa['Make']} {most_eropa['Model']}** dari Eropa lebih hemat.")
 else:
-    st.info("Keduanya memiliki efisiensi bahan bakar yang sama.")
-
+    st.info("Keduanya memiliki efisiensi bahan bakar yang sa
