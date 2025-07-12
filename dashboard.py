@@ -60,7 +60,7 @@ preview_df = preview_df.copy()
 preview_df["y_pred"] = y_pred
 preview_df["index"] = range(1, len(preview_df) + 1)
 
-# Fungsi pewarnaan berdasarkan index
+# Fungsi pewarnaan berdasarkan index (warna gelap diganti lebih terang)
 def get_color(idx):
     if idx <= 75:
         return "purple"
@@ -73,17 +73,17 @@ def get_color(idx):
     elif idx <= 375:
         return "pink"
     elif idx <= 450:
-        return "gray"
+        return "lightcoral"
     elif idx <= 525:
-        return "yellow"
+        return "gold"
     elif idx <= 600:
-        return "brown"
+        return "chocolate"
     elif idx <= 675:
-        return "teal"
+        return "deepskyblue"
     elif idx <= 750:
         return "red"
     else:
-        return "black"
+        return "violet"
 
 # Tambahkan kolom warna
 preview_df["warna"] = preview_df["index"].apply(get_color)
@@ -101,19 +101,19 @@ ax.set_title(f"Prediksi vs Aktual untuk {y_var[0]}")
 st.pyplot(fig)
 
 # Legend warna manual
-st.markdown("#### \U0001F5C2️ Keterangan Warna Berdasarkan ID")
+st.markdown("#### \U0001F4C1 Keterangan Warna Berdasarkan ID")
 st.markdown("""
-- 🔸 **Ungu**: ID 1–75  
-- 🔶 **Oranye**: ID 76–150  
-- 🔹 **Biru**: ID 151–225  
-- 🔵 **Hijau**: ID 226–300  
+- 🔮 **Ungu**: ID 1–75  
+- 🟠 **Oranye**: ID 76–150  
+- 🔵 **Biru**: ID 151–225  
+- 🟢 **Hijau**: ID 226–300  
 - 🌸 **Pink**: ID 301–375  
-- ⚫ **Abu-abu**: ID 376–450  
-- 🟡 **Kuning**: ID 451–525  
-- 🟣 **Cokelat**: ID 526–600  
-- 🟦 **Toska**: ID 601–675  
+- 🌺 **Light Coral**: ID 376–450  
+- 🟡 **Kuning (Gold)**: ID 451–525  
+- 🟤 **Cokelat (Chocolate)**: ID 526–600  
+- 🔷 **Toska (Deep Sky Blue)**: ID 601–675  
 - 🔴 **Merah**: ID 676–750  
-- ⚫ **Hitam**: ID 751–832
+- 💜 **Violet**: ID 751–832
 """)
 
 # === Insight Tambahan: Mobil Paling Hemat Asia vs Eropa ===
